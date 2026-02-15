@@ -1,0 +1,34 @@
+docker run -d \
+  --name mongodb \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=bhavyashreehm_db_user \
+  -e MONGO_INITDB_ROOT_PASSWORD=XE9qMLOtFbNC3WUQ \
+  mongo
+
+mongodb://admin:admin123@localhost:27017
+
+mkdir go-mongo-app
+cd go-mongo-app
+go mod init go-mongo-app
+
+go get go.mongodb.org/mongo-driver/mongo
+
+docker build -t go-mongo-app .
+
+docker run -p 8080:8080 go-mongo-app
+
+update dockerfile
+rebuild: use the same command
+
+stop the previous container 
+docker stop <container_id>
+
+
+mongosh
+docker exec -it mongodb mongosh -u admin -p admin123
+
+
+mongodb atlas
+docker run -p 8080:8080 \
+-e MONGO_URI="mongodb+srv://bhavyashreehm_db_user:XE9qMLOtFbNC3WUQ@cluster0.zz6aclj.mongodb.net/?appName=Cluster0" \
+go-atlas-app
